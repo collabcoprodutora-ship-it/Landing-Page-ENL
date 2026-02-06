@@ -205,6 +205,13 @@ h6 {
     display: flex;
     align-items: center;
     gap: 8px;
+    flex-direction: column;
+}
+
+@media (min-width: 768px) {
+    .countdown-group {
+        flex-direction: row;
+    }
 }
 
 .countdown-label {
@@ -244,10 +251,12 @@ h6 {
     font-family: var(--font-heading);
     font-weight: 700;
     text-transform: uppercase;
-    font-size: 11px;
+    font-size: 9px;
+    /* Reduced to ensure 2 lines */
     text-align: center;
-    max-width: 500px;
-    line-height: 1.4;
+    max-width: 100%;
+    padding: 0 4px;
+    line-height: 1.25;
 }
 
 @media (min-width: 768px) {
@@ -259,11 +268,20 @@ h6 {
 /* 7.2 Hero Fold */
 .hero-section {
     position: relative;
-    padding-top: var(--spacing-lg);
-    padding-bottom: var(--spacing-xxl);
+    padding-top: 0;
+    padding-bottom: 24px;
+    /* Reduced from 64px to tighten gap */
     overflow: hidden;
     background-color: var(--color-cream);
 }
+
+/* Restore padding for desktop */
+@media (min-width: 992px) {
+    .hero-section {
+        padding-top: var(--spacing-lg);
+    }
+}
+
 
 .event-logo {
     max-width: 100%;
@@ -278,7 +296,141 @@ h6 {
     .event-logo {
         width: 280px;
         margin-bottom: 24px;
-        /* Kept left-aligned to match text flow */
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    /* Zero padding on mobile main container to allow easy overlap */
+    .hero-main {
+        padding-top: 0;
+    }
+
+    .event-logo-badge {
+        display: inline-block;
+        background-color: #ffffff;
+        padding: 0;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        margin-top: -50px;
+        /* Overlap: Adjust based on visual preference */
+        position: relative;
+        z-index: 20;
+        /* Ensure it sits above the image mask */
+        margin-bottom: 24px;
+        max-width: 90%;
+        /* Prevent overflow on very small screens */
+        line-height: 0;
+        /* Remove bottom gap for inline image */
+        overflow: hidden;
+        /* Ensure image respects border-radius */
+    }
+
+    .event-logo {
+        width: 240px;
+        /* Slightly smaller to fit nicely in badge */
+        height: auto;
+        margin-bottom: 0;
+    }
+}
+
+.hero-mobile-wrapper {
+    position: relative;
+    /* Removed large bottom margin to allow badge to sit close */
+    margin-bottom: 0;
+}
+
+/* Gradient mask to hide cut torso */
+.hero-mobile-wrapper::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, var(--color-cream));
+    pointer-events: none;
+}
+
+/* Visibility Toggles */
+.mobile-countdown-banner {
+    display: flex;
+    /* Matches .countdown-group flex */
+    justify-content: center;
+    flex-direction: row;
+    /* Keep row for banner? Or col? Let's keep Default/Row or inherit from countdown-group */
+}
+
+/* Ensure banner countdown is row on mobile to fit the bar height often, or maybe col if text is long? 
+   The countdown-group is Col < 768px. 
+   We might want to force Row or clean up for the banner. 
+   Let's check .countdown-group definition again? 
+   It was set to Flex-Col on mobile. 
+   If we want it to fit nicely in the banner, maybe Row with smaller font is better?
+   Let's stick to the component class for now, but maybe override if needed. 
+*/
+
+.mobile-countdown-banner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.countdown-label-bottom {
+    color: var(--color-white);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 11px;
+    /* Small enough to fit in one line */
+    white-space: nowrap;
+    /* Force one line */
+    letter-spacing: 0.5px;
+}
+
+.desktop-only-countdown,
+.desktop-banner-text {
+    display: none;
+}
+
+.desktop-only {
+    display: none;
+}
+
+@media (min-width: 768px) {
+
+    .mobile-countdown-banner,
+    .mobile-countdown-hero {
+        display: none;
+    }
+
+    .desktop-only-countdown {
+        display: flex;
+    }
+
+    .desktop-banner-text {
+        display: inline;
+    }
+
+    .desktop-only {
+        display: inline-block;
+        /* Restoration of microheadline */
+    }
+}
+
+.hero-mobile-img {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+}
+
+@media (min-width: 992px) {
+    .hero-mobile-wrapper {
+        display: none;
     }
 }
 
@@ -375,6 +527,16 @@ h6 {
     }
 }
 
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 22px;
+    /* Reduced to fit 4 lines on mobile */
+    font-weight: 800;
+    color: var(--color-navy);
+    margin-bottom: var(--spacing-lg);
+    line-height: 1.25;
+}
+
 .microheadline {
     font-family: var(--font-heading);
     font-weight: 600;
@@ -386,8 +548,11 @@ h6 {
 }
 
 .hero-headline {
+    font-family: var(--font-heading);
     color: var(--color-navy);
-    font-size: 32px;
+    font-size: 26px;
+    /* Further reduced from 32px to fit 5 lines */
+    line-height: 1.1;
     font-weight: 800;
     margin-bottom: var(--spacing-md);
 }
@@ -406,7 +571,8 @@ h6 {
 }
 
 .progress-container {
-    margin-top: var(--spacing-lg);
+    margin-top: 16px;
+    /* Reduced from var(--spacing-lg) */
 }
 
 .progress-bar {
@@ -430,7 +596,7 @@ h6 {
 }
 
 .hero-image-container {
-    display: flex;
+    display: none;
     justify-content: center;
 }
 

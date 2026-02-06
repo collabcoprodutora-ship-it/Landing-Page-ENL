@@ -13,26 +13,43 @@ document.addEventListener('DOMContentLoaded', () => {
         const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-        const daysEl = document.getElementById("days");
-        const hoursEl = document.getElementById("hours");
-        const minutesEl = document.getElementById("minutes");
-        const secondsEl = document.getElementById("seconds");
+        // Helper to update timer elements by suffix
+        const updateTimerDisplay = (suffix) => {
+            const daysEl = document.getElementById("days" + suffix);
+            const hoursEl = document.getElementById("hours" + suffix);
+            const minutesEl = document.getElementById("minutes" + suffix);
+            const secondsEl = document.getElementById("seconds" + suffix);
 
-        if (daysEl && hoursEl && minutesEl && secondsEl) {
-            daysEl.innerHTML = days < 10 ? "0" + days : days;
-            hoursEl.innerHTML = hours < 10 ? "0" + hours : hours;
-            minutesEl.innerHTML = minutes < 10 ? "0" + minutes : minutes;
-            secondsEl.innerHTML = seconds < 10 ? "0" + seconds : seconds;
-        }
+            if (daysEl && hoursEl && minutesEl && secondsEl) {
+                daysEl.innerHTML = days < 10 ? "0" + days : days;
+                hoursEl.innerHTML = hours < 10 ? "0" + hours : hours;
+                minutesEl.innerHTML = minutes < 10 ? "0" + minutes : minutes;
+                secondsEl.innerHTML = seconds < 10 ? "0" + seconds : seconds;
+            }
+        };
+
+        // Update Desktop Timer (IDs: days, hours...)
+        updateTimerDisplay("");
+        // Update Mobile Banner Timer (IDs: days-banner, hours-banner...)
+        updateTimerDisplay("-banner");
 
         if (distance < 0) {
             clearInterval(x);
-            if (daysEl && hoursEl && minutesEl && secondsEl) {
-                daysEl.innerHTML = "00";
-                hoursEl.innerHTML = "00";
-                minutesEl.innerHTML = "00";
-                secondsEl.innerHTML = "00";
-            }
+             const resetTimerDisplay = (suffix) => {
+                const daysEl = document.getElementById("days" + suffix);
+                const hoursEl = document.getElementById("hours" + suffix);
+                const minutesEl = document.getElementById("minutes" + suffix);
+                const secondsEl = document.getElementById("seconds" + suffix);
+                 if (daysEl && hoursEl && minutesEl && secondsEl) {
+                    daysEl.innerHTML = "00";
+                    hoursEl.innerHTML = "00";
+                    minutesEl.innerHTML = "00";
+                    secondsEl.innerHTML = "00";
+                }
+            };
+            resetTimerDisplay("");
+            resetTimerDisplay("-banner");
+            
             const label = document.querySelector('.countdown-text');
             if (label) label.innerText = "INSCRIÇÕES ENCERRADAS";
         }
