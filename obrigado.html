@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quase lá... | Workshop Encomenda Não é Lucro</title>
+    <meta name="description" content="Confirme seus dados para acessar o Grupo VIP.">
+    <meta name="author" content="Tânia Bastos">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital@0;1&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="index.css">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <style>
+        body {
+            background-color: var(--color-cream);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: var(--font-body);
+        }
+
+        .thank-you-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 16px;
+            min-height: 100vh;
+        }
+
+        .thank-you-card {
+            background: #fff;
+            max-width: 550px;
+            /* Slightly narrower for better focus */
+            width: 100%;
+            border-radius: 16px;
+            /* Deeper shadow for "floating" effect */
+            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ty-logo {
+            max-width: 220px;
+            /* Revised per design balance */
+            margin-bottom: 24px;
+            display: inline-block;
+            border-radius: 12px;
+        }
+
+        /* Progress Bar */
+        .ty-progress-wrapper {
+            margin-bottom: 24px;
+        }
+
+        .ty-progress-bar {
+            height: 16px;
+            background-color: #E5E7EB;
+            border-radius: 999px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        @keyframes fillBar {
+            from {
+                width: 0%;
+            }
+
+            to {
+                width: 90%;
+            }
+        }
+
+        .ty-progress-fill {
+            height: 100%;
+            background-color: #EF4444;
+            /* Red color */
+            width: 90%;
+            border-radius: 999px;
+            position: relative;
+            animation: fillBar 1.5s ease-out forwards;
+        }
+
+        .ty-progress-text {
+            font-family: var(--font-heading);
+            font-size: 15px;
+            font-weight: 800;
+            color: #EF4444;
+            /* Match bar color */
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        .ty-progress-subtext {
+            font-size: 13px;
+            color: #6B7280;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        /* Headlines */
+        .ty-headline {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--color-navy);
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .ty-subheadline {
+            font-size: 16px;
+            color: #4B5563;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        /* CTA Button */
+        .ty-btn-cta {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: #25D366;
+            /* WhatsApp Green requested? User said "Cor principal da identidade (laranja)". */
+            /* Wait, user said "Cor principal da identidade (laranja do evento)" EXCEPT "Ícone do WhatsApp". */
+            /* Usually WA buttons are green, but user specifically asked for "Laranja do evento". */
+            /* I will use the Terracotta/Orange from index.css */
+            background-color: var(--color-terracotta);
+            color: #fff;
+            font-family: var(--font-heading);
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 20px 24px;
+            text-decoration: none;
+            border-radius: 12px;
+            /* Rounded corners */
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s;
+            margin-bottom: 32px;
+            line-height: 1.2;
+        }
+
+        .ty-btn-cta:hover {
+            background-color: #b04b2e;
+            /* Darker terracotta */
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Bullets */
+        .ty-benefits-list {
+            text-align: left;
+            background-color: #F9FAFB;
+            padding: 24px;
+            border-radius: 12px;
+            border: 1px solid #E5E7EB;
+            margin-bottom: 24px;
+        }
+
+        .ty-benefits-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 12px;
+            text-transform: uppercase;
+        }
+
+        .ty-benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #374151;
+            line-height: 1.4;
+        }
+
+        .ty-benefit-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .ty-social-proof {
+            font-size: 14px;
+            color: #6B7280;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .ty-warning-footer {
+            font-size: 13px;
+            color: #EF4444;
+            margin-top: 16px;
+            font-weight: 600;
+            background: #FEF2F2;
+            padding: 8px;
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        @media (max-width: 640px) {
+            .thank-you-card {
+                padding: 24px;
+            }
+
+            .ty-headline {
+                font-size: 22px;
+            }
+
+            .ty-btn-cta {
+                font-size: 16px;
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="thank-you-section">
+        <div class="thank-you-card">
+
+            <!-- Logo -->
+            <img src="./assets/images/logo-event.png" alt="Workshop Encomenda Não é Lucro" class="ty-logo">
+
+            <!-- Subtitle Reinforcement -->
+            <p
+                style="font-size: 14px; font-weight: 600; color: #9CA3AF; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">
+                Inscrição quase concluída</p>
+
+            <!-- Progress Bar -->
+            <div class="ty-progress-wrapper">
+                <div class="ty-progress-bar">
+                    <div class="ty-progress-fill"></div>
+                </div>
+                <div class="ty-progress-text">90% concluído — Falta só entrar no Grupo VIP</div>
+                <div class="ty-progress-subtext">Sem esse passo, você perde o acesso às aulas.</div>
+            </div>
+
+            <!-- Headlines -->
+            <h1 class="ty-headline">🚨 Sua inscrição ainda NÃO está completa</h1>
+            <p class="ty-subheadline">Você só garante sua vaga e os materiais entrando no Grupo VIP do WhatsApp agora.
+            </p>
+
+            <!-- CTA Button -->
+            <a href="https://chat.whatsapp.com/HJnl61aRmdBAJ7A547uoHM?mode=gi_t" class="ty-btn-cta" target="_blank">
+                <!-- WhatsApp Icon SVG -->
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.0001 2C6.48609 2 2.00009 6.486 2.00009 12C2.00009 13.843 2.52909 15.612 3.52409 17.14L2.03009 22.18L7.20009 20.73C8.63809 21.569 10.2781 22 12.0001 22C17.5141 22 22.0001 17.514 22.0001 12C22.0001 6.486 17.5141 2 12.0001 2ZM17.1351 17.025C16.9181 17.653 16.2731 17.854 15.6961 17.942C15.2631 18.008 14.6541 18.069 12.7531 17.25C10.3751 16.225 8.84709 13.784 8.73009 13.626C8.61309 13.468 7.76509 12.333 7.76509 11.161C7.76509 9.988 8.35109 9.416 8.58509 9.167C8.79009 8.948 9.02509 8.904 9.23109 8.904C9.40709 8.904 9.58209 8.913 9.72809 8.921C9.87509 8.928 10.0521 8.884 10.2571 9.382C10.4631 9.879 10.9601 11.109 11.0191 11.226C11.0781 11.343 11.1361 11.504 11.0491 11.666C10.9611 11.828 10.8731 11.93 10.7561 12.076C10.6391 12.222 10.5101 12.327 10.4021 12.464C10.2941 12.599 10.1801 12.724 10.3131 12.964C10.4441 13.197 10.9021 13.963 11.5811 14.585C12.4551 15.385 13.1671 15.639 13.4311 15.756C13.6651 15.858 13.9141 15.829 14.0901 15.639C14.3241 15.39 14.6181 14.979 14.9121 14.555C15.1171 14.262 15.3811 14.292 15.5861 14.38C15.8061 14.468 16.9491 15.039 17.1841 15.156C17.4191 15.273 17.5951 15.332 17.6531 15.434C17.7121 15.536 17.7121 15.829 17.1351 17.025Z" />
+                </svg>
+                🔥 ENTRAR NO GRUPO VIP DO WHATSAPP AGORA
+            </a>
+
+            <!-- Benefits Bullets -->
+            <div class="ty-benefits-list">
+                <div class="ty-benefits-title">Você recebe:</div>
+                <div class="ty-benefit-item">
+                    <span style="color: #22C55E;">✅</span>
+                    <span>Materiais de <strong>Gestão e Precificação</strong></span>
+                </div>
+                <div class="ty-benefit-item">
+                    <span style="color: #22C55E;">✅</span>
+                    <span>Acesso às <strong>2 aulas AO VIVO</strong> (sem replay)</span>
+                </div>
+                <div class="ty-benefit-item">
+                    <span style="color: #22C55E;">✅</span>
+                    <span>Avisos, lembretes e links de acesso</span>
+                </div>
+                <div class="ty-benefit-item">
+                    <span style="color: #22C55E;">✅</span>
+                    <span>Suporte exclusivo durante o evento</span>
+                </div>
+            </div>
+
+
+
+            <div class="ty-warning-footer">
+                ⚠️ Sem entrar no grupo, você perde o acesso às aulas.
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>
