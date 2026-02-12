@@ -197,7 +197,8 @@ h6 {
 @media (min-width: 768px) {
     .countdown-container {
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: center;
+        gap: 32px;
     }
 }
 
@@ -261,7 +262,12 @@ h6 {
 
 @media (min-width: 768px) {
     .countdown-text {
-        text-align: right;
+        text-align: left;
+        max-width: 350px;
+        font-size: 10px;
+        opacity: 0.9;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+        padding-left: 16px;
     }
 }
 
@@ -1672,6 +1678,8 @@ footer {
     .bio-main-img {
         width: 280px;
         height: 380px;
+        z-index: 10;
+        /* Main image sits higher but floating ones will be higher */
     }
 }
 
@@ -1686,20 +1694,25 @@ footer {
 
 .bio-floating-img:hover {
     transform: scale(1.05);
-    z-index: 3;
+    z-index: 20;
 }
 
 /* Positioning the floating images "around" the center */
+/* All floating images have z-index 11 to sit ON TOP of main image */
+.bio-floating-img {
+    z-index: 11;
+}
+
 .float-1 {
     width: 140px;
     height: 140px;
     border-radius: 50%;
     /* Circle */
-    top: 40px;
-    right: auto;
+    top: 20px;
+    /* Moved down to overlap */
     left: 50%;
-    margin-left: 60px;
-    /* overlap */
+    margin-left: -190px;
+    /* Moved right to overlap */
 }
 
 .float-2 {
@@ -1707,11 +1720,11 @@ footer {
     height: 120px;
     border-radius: 20px 0 20px 0;
     /* Leaf shape */
-    bottom: 50px;
-    left: auto;
+    bottom: 30px;
+    /* Moved up */
     right: 50%;
-    margin-right: 80px;
-    /* overlap */
+    margin-right: -190px;
+    /* Moved left to overlap */
 }
 
 .float-3 {
@@ -1719,35 +1732,237 @@ footer {
     height: 130px;
     border-radius: 30px;
     /* Pillow */
-    top: 60px;
-    left: auto;
+    top: 40px;
+    /* Moved down */
     right: 50%;
-    margin-right: 100px;
-    /* overlap */
+    margin-right: -180px;
+    /* Moved left */
+}
+
+.float-4 {
+    width: auto;
+    height: 120px;
+    border-radius: 12px;
+    bottom: 0px;
+    left: 50%;
+    margin-left: -170px;
 }
 
 @media (min-width: 992px) {
     .float-1 {
         width: 160px;
         height: 160px;
-        margin-left: 70px;
-        /* maintain overlap with larger size */
+        margin-left: -220px;
+        /* Adjust overlap for desktop */
+        top: 30px;
     }
 
     .float-2 {
         width: 180px;
         height: 140px;
-        margin-right: 90px;
+        margin-right: -230px;
+        bottom: 50px;
     }
 
     .float-3 {
         width: 150px;
         height: 150px;
-        margin-right: 110px;
+        margin-right: -220px;
+        top: 50px;
+    }
+
+    .float-4 {
+        width: auto;
+        height: 140px;
+        border-radius: 16px;
+        margin-left: -200px;
+        bottom: 0px;
     }
 
     .section-bio {
         overflow: hidden;
         /* Prevent floating images from breaking layout width if they go too far */
+    }
+}
+
+/* Testimonial Avatar Styles */
+.testimonial-card {
+    position: relative;
+    margin-top: 40px;
+    /* Space for the floating avatar */
+    padding-top: 50px;
+    /* Internal space for avatar overlap */
+    overflow: visible;
+    /* Allow avatar to float outside */
+}
+
+.testimonial-avatar {
+    position: absolute;
+    top: -40px;
+    /* Half height to center on border */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 3px solid var(--color-terracotta);
+    object-fit: cover;
+    background-color: var(--color-white);
+    /* Background in case image is transparent */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-author-info {
+    text-align: center;
+    align-items: center;
+    /* Force flex items to center */
+    width: 100%;
+    /* Ensure full width */
+}
+
+.testimonial-author-info .author-name,
+.testimonial-author-info .author-role {
+    display: block;
+    text-align: center;
+    width: 100%;
+    /* Ensure text centering works across full width */
+}
+
+/* Authority Signature */
+.section-authority {
+    padding: 40px 0;
+    background-color: var(--color-white);
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.authority-signature {
+    margin-top: 32px;
+    /* Spacing from title */
+    /* Removed top margin/padding/border since it's now in its own section structure */
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+}
+
+.sig-item {
+    display: flex;
+    flex-direction: column;
+    /* Caption on bottom */
+    align-items: center;
+    gap: 12px;
+    max-width: 200px;
+}
+
+/* Specific mobile full-width for the first item (Que Seja Doce) */
+.sig-item.sig-hero {
+    max-width: 100%;
+    width: 100%;
+}
+
+/* Logos Row Container (Mobile) */
+.logos-row {
+    display: flex;
+    flex-direction: column;
+    /* Stack vertically on mobile */
+    align-items: center;
+    gap: 48px;
+    /* More gap for vertical scroll */
+    width: 100%;
+    margin-top: 40px;
+}
+
+.logos-row .sig-item {
+    width: 100%;
+    max-width: 100%;
+    /* Full width */
+    display: flex;
+    flex-direction: column;
+    /* Caption on bottom */
+    align-items: center;
+}
+
+.logos-row .sig-img {
+    height: auto;
+    width: auto;
+    max-width: 80%;
+    /* Large but with breathing room */
+    max-height: 180px;
+    /* Cap height so tall logos don't take entire screen alone */
+    object-fit: contain;
+    filter: grayscale(100%);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+/* Specific styling for the hero image */
+.sig-hero .sig-img {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    object-fit: cover;
+}
+
+/* Reset transforms for vertical layout */
+.logos-row .sig-item:nth-child(1) .sig-img,
+.logos-row .sig-item:nth-child(2) .sig-img {
+    transform: none;
+}
+
+.sig-img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+.sig-caption {
+    font-size: 14px;
+    /* Larger caption for full width view */
+    color: #6B7280;
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 12px;
+    /* Spaced above caption (below image) */
+    margin-bottom: 0;
+    max-width: 90%;
+}
+
+@media (min-width: 992px) {
+    .authority-signature {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+        /* Aligns top of all items */
+    }
+
+    .logos-row {
+        display: contents;
+        /* Ungroups the items so they become direct children of authority-signature */
+    }
+
+    /* Reset width/max-width for all sig items now sitting directly in row */
+    .sig-item,
+    .logos-row .sig-item {
+        width: 23%;
+        /* Approx 1/4th width */
+        max-width: none;
+    }
+
+    .sig-img,
+    .logos-row .sig-img,
+    .sig-hero .sig-img {
+        height: 80px;
+        /* Uniform height constraint for alignment */
+        width: auto;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+
+
+    .sig-caption {
+        font-size: 11px;
+        /* Back to small on desktop */
+        margin-top: 12px;
+        margin-bottom: 0;
     }
 }

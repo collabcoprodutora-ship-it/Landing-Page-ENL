@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Countdown Timer Logic ---
     // Set the date we're counting down to: Feb 13, 2026 00:00:00
-    const countDownDate = new Date("Feb 13, 2026 00:00:00").getTime();
+    const countDownDate = new Date("Feb 14, 2026 00:00:00").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function () {
@@ -35,12 +35,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (distance < 0) {
             clearInterval(x);
-             const resetTimerDisplay = (suffix) => {
+            const resetTimerDisplay = (suffix) => {
                 const daysEl = document.getElementById("days" + suffix);
                 const hoursEl = document.getElementById("hours" + suffix);
                 const minutesEl = document.getElementById("minutes" + suffix);
                 const secondsEl = document.getElementById("seconds" + suffix);
-                 if (daysEl && hoursEl && minutesEl && secondsEl) {
+                if (daysEl && hoursEl && minutesEl && secondsEl) {
                     daysEl.innerHTML = "00";
                     hoursEl.innerHTML = "00";
                     minutesEl.innerHTML = "00";
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
             };
             resetTimerDisplay("");
             resetTimerDisplay("-banner");
-            
+
             const label = document.querySelector('.countdown-text');
             if (label) label.innerText = "INSCRIÇÕES ENCERRADAS";
         }
