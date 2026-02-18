@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Countdown Timer Logic ---
     // Set the date we're counting down to: Feb 13, 2026 00:00:00
-    const countDownDate = new Date("Feb 14, 2026 00:00:00").getTime();
+    const countDownDate = new Date("Feb 27, 2026 23:59:00").getTime();
 
     // Update the count down every 1 second
     const x = setInterval(function () {
